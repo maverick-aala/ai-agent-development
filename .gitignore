@@ -1,0 +1,20 @@
+#environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.pytest_cache/
+
+# Logs
+logs
+*.log
+
+#personal data
+.personal/**
+
