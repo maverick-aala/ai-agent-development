@@ -25,7 +25,7 @@ messages_history=[{
     "role": "system",
     "content": choice
 }]
-user_input = input("You: ")
+user_input = input("\nYou: ")
 
 
 try:
@@ -53,7 +53,7 @@ try:
         # Safely display the response content
         message_content = response.choices[0].message.content
         if message_content:
-            print(message_content)
+            print("\nAI: ", message_content)
             messages_history.append({
                 "role": "assistant",
                 "content": message_content
@@ -61,7 +61,7 @@ try:
         else:
             print("Received an empty response from the model.")
 
-        user_input = input("You: ")
+        user_input = input("\nYou: ")
 
 except APIError as e:
     print(f"OpenAI API Error: {e}")
