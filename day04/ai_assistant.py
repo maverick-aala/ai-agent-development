@@ -1,0 +1,79 @@
+import os
+from openai import OpenAI, APIError
+from dotenv import load_dotenv
+
+# custom methods
+from util import get_user_choice
+from tools import get_current_time, roll_dice, generate_password
+
+# load configurations from the .env file
+load_dotenv()
+
+#create a cleint that communicates with ollama (AI Model)
+client = OpenAI(
+    base_url=os.getenv("BASE_URL"),
+    api_key=os.getenv("API_KEY"),
+    timeout=120.0
+)
+
+print("*"*50)
+print("Start Conversation Day 02 ", get_current_time())
+print("*"*50)
+
+# here role = system is telling AI Model to behave like, for example behave like teacher, developer, parents etc 
+
+choice = get_user_choice()
+messages_history=[{
+    "role": "system",
+    "content": choice
+}]
+
+
+try:
+    while True:
+
+        user_input = input("\nYou: ")
+
+        # here we know this don't cover all cases but just for understanding the concept of using tools we did code here
+        if ("time" or "clock") in user_input.lower():
+            print("Current time: ", get_current_time())
+            continue
+        elif user_input.lower() == "quit":
+            break
+
+
+        messages_history.append( 
+            {
+                "role": "user",
+                "content": user_input
+            }
+        )
+        #send a question to the AI Model
+        response = client.chat.completions.create(
+                model=os.getenv("MODEL"),
+                messages=messages_history,
+                max_tokens=4096,
+                extra_body={
+                "options": {
+                    "num_predict": 4096,  # Tells Ollama directly to allow long generation
+                    "temperature": 0.3    # Lower temperature reduces repeating/hanging loops
+                }
+            }
+        )
+
+        # Safely display the response content
+        message_content = response.choices[0].message.content
+        if message_content:
+            print("\nAI: ", message_content)
+            messages_history.append({
+                "role": "assistant",
+                "content": message_content
+            })
+        else:
+            print("Received an empty response from the model.")
+
+except APIError as e:
+    print(f"OpenAI API Error: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
+
