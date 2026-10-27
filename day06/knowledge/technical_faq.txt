@@ -1,0 +1,8 @@
+Topic: API Rate Limits and Authentication
+
+1. Authentication Method: All API requests must include a Bearer token in the Authorization header. Example: `Authorization: Bearer sk_live_...`
+2. Rate Limits: Standard tier accounts are capped at 60 requests per minute. Enterprise tier accounts allow up to 1,000 requests per minute.
+3. Error Codes:
+   - 401 Unauthorized: Invalid or expired API token.
+   - 429 Too Many Requests: Rate limit exceeded; implement exponential backoff.
+   - 500 Internal Server Error: Contact support@acmecorp.com if the issue persists.

@@ -1,0 +1,5 @@
+Explain this code in very short line by line in bulleted points:
+def read_text_file(filename):
+    with open(filename, "r") as file:
+        content=file.read()
+    return content

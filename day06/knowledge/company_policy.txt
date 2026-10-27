@@ -1,0 +1,8 @@
+Company Name: Acme Corp
+Effective Date: January 1, 2026
+Subject: Remote Work and Leave Policy
+
+1. Remote Work Eligibility: Employees are allowed to work remotely up to 3 days per week with manager approval.
+2. Paid Time Off (PTO): Full-time employees accrue 20 days of paid time off per calendar year.
+3. Expense Reimbursement: Home office equipment up to $500 is eligible for reimbursement once every two years with an attached receipt.
+4. Working Hours: Core collaboration hours are expected between 10:00 AM and 3:00 PM local time.

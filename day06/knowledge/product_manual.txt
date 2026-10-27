@@ -1,0 +1,10 @@
+Product: CloudSync Pro (v4.2)
+Document Type: Quick Start Guide
+
+1. Overview: CloudSync Pro provides real-time encrypted file synchronization across local and cloud storage.
+2. Minimum System Requirements:
+   - OS: Windows 10/11, macOS 12+, or Ubuntu 22.04
+   - RAM: 4 GB minimum (8 GB recommended)
+   - Disk Space: 500 MB free space
+3. Initial Setup: Run the installer, sign in with your enterprise SSO credentials, and select the root synchronization folder.
+4. Troubleshooting Sync Conflicts: If a conflict occurs, CloudSync Pro creates a local `.conflict` copy alongside the original file.
