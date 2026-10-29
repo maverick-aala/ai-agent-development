@@ -1,6 +1,6 @@
 # AI Agent Development
 
-A hands-on, day-by-day Python course for building conversational AI assistants. Each folder (`day01`–`day06`) adds one layer of capability: from a single question to memory, personalities, tools, file reading, and retrieval (RAG) building blocks.
+A hands-on, day-by-day Python course for building **conversational AI assistants and local AI agents** with Python and Ollama. Each folder (`day01`–`day07`) adds one layer: Q&A, memory, system prompts, tools, file reading, RAG retrieval, and **LLM-based tool planning**.
 
 The stack uses the [OpenAI Python SDK](https://github.com/openai/openai-python) against a compatible API—typically [Ollama](https://ollama.com) running locally.
 
@@ -41,7 +41,7 @@ API_KEY=ollama
 # Used by day01–day05 and day02 thinking demo
 MODEL=your-chat-model
 
-# Day 06 chat assistant
+# Day 06–07 chat assistant and Day 07 planner
 CHAT_MODEL=your-chat-model
 
 # Day 06 embeddings / RAG
@@ -53,10 +53,10 @@ EMBEDDING_MODEL=nomic-embed-text
 ### Quick start (latest day)
 
 ```bash
-python day06/ai_assistant.py
+python day07/assistant.py
 ```
 
-Other days: `python day0N/ai_assistant.py` (and `python day01/hello_ai.py` for the first one-shot demo).
+Other days: `python day0N/ai_assistant.py` where present, `python day07/assistant.py` for the planner agent, and `python day01/hello_ai.py` for the first one-shot demo.
 
 ## Learning path (by commit)
 
@@ -69,8 +69,9 @@ Other days: `python day0N/ai_assistant.py` (and `python day01/hello_ai.py` for t
 | **Day 04** | Python “tools” (time, dice, password) wired into the loop | `day04/tools.py`, `day04/ai_assistant.py`, `day04/tools_manager.py` |
 | **Day 05** | Read `.txt` files and inject content into the user message | `day05/tools.py`, `day05/ai_assistant.py`, sample data in `day05/data/` |
 | **Day 06** | RAG workflow: knowledge base, keyword vs embedding retrieval | `day06/retriever.py`, `day06/similarity.py`, `day06/test_embedding.py`, `day06/test_retriever.py` |
+| **Day 07** | AI planner + tool agent (plan → execute → natural answer) | `day07/planner.py`, `day07/assistant.py`, `day07/tools.py`, `day07/test_planner.py` |
 
-Type `quit` at the prompt to exit interactive assistants.
+Type `quit` at the prompt to exit interactive assistants (including `day07/assistant.py`).
 
 ### Day 01 — Basic assistant
 
@@ -120,6 +121,12 @@ python day06/test_embedding.py
 python day06/test_retriever.py
 ```
 
+### Day 07 — Planner agent
+
+- `choose_tools()` asks the chat model which of three tools matches the user request (or none).
+- `assistant.py` runs the tool in Python, then calls the model again to phrase the reply without mentioning tools.
+- See [day07/README.md](day07/README.md) for architecture, examples, and production-style improvements (JSON tool calls, memory, RAG).
+
 ## Project layout
 
 ```
@@ -130,6 +137,7 @@ ai-agent-development/
 ├── day04/          # Tool functions                  → day04/README.md
 ├── day05/          # Read files into prompts         → day05/README.md
 ├── day06/          # Embeddings, similarity, RAG     → day06/README.md
+├── day07/          # LLM planner + tool agent        → day07/README.md
 ├── .env            # Local config (not in git)
 └── .personal/      # Personal notes (ignored by git)
 ```

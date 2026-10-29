@@ -66,3 +66,4 @@ python day04/tools_manager.py
 - Tools = reliable code; the model = language and reasoning.
 - Routing can be keywords today; later days use file paths and retrieval.
 - Day 05 adds `read_text_file()` and injects file content into the user message.
+- Day 07 replaces keyword routing with an [LLM planner](../day07/README.md) that selects tools before answering.

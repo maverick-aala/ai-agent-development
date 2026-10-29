@@ -108,3 +108,7 @@ To try keyword retrieval interactively, import `retrieve` in a short script or P
 - **RAG** = retrieve relevant text, then generate an answer.
 - Keyword search is simple; embeddings match meaning better.
 - Production systems chunk documents, cache embeddings, and top-k retrieve—not whole-file embed every time (this repo keeps the logic easy to read).
+
+## Next step
+
+**Day 07 — [LLM planner and tool agent](../day07/README.md):** let the model choose which Python tool to run, then generate a natural answer (plan → act → respond).

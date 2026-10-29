@@ -41,6 +41,7 @@ try:
 
         # Safely display the response content
         message_content = response.choices[0].message.content
+        print("Response Choices: ", response)
         if message_content:
             print(message_content)
         else:
