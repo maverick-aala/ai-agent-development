@@ -1,0 +1,21 @@
+[project]
+name = "ai-agent-development"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Alankar Saini", email = "alankar.saini@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastmcp>=4.1.4",
+    "openai>=3.42.0",
+]
+
+[project.scripts]
+ai-agent-development = "ai_agent_development:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
