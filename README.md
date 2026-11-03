@@ -1,12 +1,12 @@
 # AI Agent Development
 
-A hands-on, day-by-day Python course for building **conversational AI assistants and local AI agents** with Python and Ollama. Each folder (`day01`–`day07`) adds one layer: Q&A, memory, system prompts, tools, file reading, RAG retrieval, and **LLM-based tool planning**.
+A hands-on, day-by-day Python course for building **conversational AI assistants and local AI agents** with Python and Ollama. Each folder (`day01`–`day08`) adds one layer: Q&A, memory, system prompts, tools, file reading, RAG retrieval, **LLM-based tool planning**, and **MCP (Model Context Protocol)** servers.
 
 The stack uses the [OpenAI Python SDK](https://github.com/openai/openai-python) against a compatible API—typically [Ollama](https://ollama.com) running locally.
 
 ## Prerequisites
 
-- Python 3.10+
+- Python 3.12+ (see `pyproject.toml`; Day 08 uses **FastMCP**)
 - [Ollama](https://ollama.com) (or another OpenAI-compatible endpoint)
 - Chat model pulled in Ollama (for example `llama3.2`, `qwen2.5`, or your course model)
 - For Day 06: an embedding model (for example `nomic-embed-text`)
@@ -30,6 +30,8 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
 ```bash
 pip install openai python-dotenv numpy
+# Day 08 MCP: from repo root, prefer uv sync (installs fastmcp from pyproject.toml)
+uv sync
 ```
 
 3. Create a `.env` file in the project root (see `.gitignore`; never commit secrets):
@@ -53,10 +55,10 @@ EMBEDDING_MODEL=nomic-embed-text
 ### Quick start (latest day)
 
 ```bash
-python day07/assistant.py
+python day08/agent.py
 ```
 
-Other days: `python day0N/ai_assistant.py` where present, `python day07/assistant.py` for the planner agent, and `python day01/hello_ai.py` for the first one-shot demo.
+Other days: `python day0N/ai_assistant.py` where present, `python day07/assistant.py` for the in-process planner, `python day08/agent.py` for MCP tools, and `python day01/hello_ai.py` for the first one-shot demo.
 
 ## Learning path (by commit)
 
@@ -70,8 +72,9 @@ Other days: `python day0N/ai_assistant.py` where present, `python day07/assistan
 | **Day 05** | Read `.txt` files and inject content into the user message | `day05/tools.py`, `day05/ai_assistant.py`, sample data in `day05/data/` |
 | **Day 06** | RAG workflow: knowledge base, keyword vs embedding retrieval | `day06/retriever.py`, `day06/similarity.py`, `day06/test_embedding.py`, `day06/test_retriever.py` |
 | **Day 07** | AI planner + tool agent (plan → execute → natural answer) | `day07/planner.py`, `day07/assistant.py`, `day07/tools.py`, `day07/test_planner.py` |
+| **Day 08** | MCP server + client; dynamic tool discovery and agent | `day08/agent.py`, `day08/model_context_protocol/mcp_server.py`, `mcp_client.py` |
 
-Type `quit` at the prompt to exit interactive assistants (including `day07/assistant.py`).
+Type `quit` at the prompt to exit interactive assistants (`day07/assistant.py`; Day 08 runs one request per invocation).
 
 ### Day 01 — Basic assistant
 
@@ -127,6 +130,12 @@ python day06/test_retriever.py
 - `assistant.py` runs the tool in Python, then calls the model again to phrase the reply without mentioning tools.
 - See [day07/README.md](day07/README.md) for architecture, examples, and production-style improvements (JSON tool calls, memory, RAG).
 
+### Day 08 — MCP tools
+
+- `mcp_server.py` exposes `current_time`, `roll_dice`, and `generate_password` via FastMCP.
+- `agent.py` discovers tools over MCP, plans with `CHAT_MODEL`, executes via `call_tool`, then answers in natural language.
+- See [day08/README.md](day08/README.md) for setup, run commands, and Day 07 vs Day 08 comparison.
+
 ## Project layout
 
 ```
@@ -138,6 +147,8 @@ ai-agent-development/
 ├── day05/          # Read files into prompts         → day05/README.md
 ├── day06/          # Embeddings, similarity, RAG     → day06/README.md
 ├── day07/          # LLM planner + tool agent        → day07/README.md
+├── day08/          # MCP server + agent              → day08/README.md
+├── pyproject.toml  # fastmcp and project deps (Day 08)
 ├── .env            # Local config (not in git)
 └── .personal/      # Personal notes (ignored by git)
 ```

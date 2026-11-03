@@ -117,10 +117,15 @@ Same idea (model chooses an action, runtime runs code), but implemented manually
 **What should I build next?**  
 Add JSON tool plans, conversation memory, retrieval from Day 06 before the answer step, or register `read_text_file` in the planner prompt.
 
+## Next step
+
+**Day 08 — [MCP tools with FastMCP](../day08/README.md):** expose the same capabilities on an MCP server, discover tools at runtime, and call them from `agent.py`.
+
 ## Related lessons
 
 - [Day 04 — Python tools](../day04/README.md)
 - [Day 06 — RAG and embeddings](../day06/README.md)
+- [Day 08 — Model Context Protocol](../day08/README.md)
 - [Course overview](../README.md)
 
 ## Takeaways
