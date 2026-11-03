@@ -16,7 +16,7 @@ async def main():
 
     result = await execute_tool(
         client,
-        tools[0].name if len(tools) > 0 else "roll_dice"
+        tools[2].name if len(tools) > 0 else "roll_dice"
     )
 
     print(f"{tools[0].name if len(tools) > 0 else "roll_dice"}: ", result.content[0].text)

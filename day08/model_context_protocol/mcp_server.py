@@ -18,9 +18,10 @@ def roll_dice():
 
 @mcp.tool()
 def generate_password(length:int = 12):
-    """Generate a secure and strong password."""
-    combination_of_characters = (string.ascii_letters + string.digits + string.punctuation)
-    return "".join(secrets.choice(combination_of_characters) for _ in range(length))
+    """Generate a secure password. Whenever user ask for new, strong, or safe password."""
+    # combination_of_characters = (string.ascii_letters + string.digits + string.punctuation)
+    # return "".join(secrets.choice(combination_of_characters) for _ in range(length))
+    return secrets.token_urlsafe(length)
 
 if __name__ == "__main__":
     print("Starting the MCP server...")

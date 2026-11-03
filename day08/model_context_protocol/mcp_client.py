@@ -3,7 +3,7 @@ from fastmcp import Client
 async def connect():
     """Connect to the MCP Server"""
     
-    client = Client("day08/model-context-protocol/mcp_server.py")
+    client = Client("day08/model_context_protocol/mcp_server.py")
     await client.__aenter__()
     print("Connected to the MCP Server")
     return client
@@ -32,4 +32,5 @@ async def execute_tool(client, tool_name, arguments=None):
         arguments
     )
 
-    return result
+    return result.content[0].text
+    # system returned metadata instead of the actual credentials
