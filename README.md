@@ -1,6 +1,6 @@
 # AI Agent Development
 
-A hands-on, day-by-day Python course for building **conversational AI assistants and local AI agents** with Python and Ollama. Each folder (`day01`–`day08`) adds one layer: Q&A, memory, system prompts, tools, file reading, RAG retrieval, **LLM-based tool planning**, and **MCP (Model Context Protocol)** servers.
+A hands-on, day-by-day Python course for building **conversational AI assistants and local AI agents** with Python and Ollama. Each folder (`day01`–`day09`) adds one layer: Q&A, memory, system prompts, tools, file reading, RAG retrieval, **LLM-based tool planning**, **MCP** servers, and **multi-step agent loops with state**.
 
 The stack uses the [OpenAI Python SDK](https://github.com/openai/openai-python) against a compatible API—typically [Ollama](https://ollama.com) running locally.
 
@@ -55,10 +55,10 @@ EMBEDDING_MODEL=nomic-embed-text
 ### Quick start (latest day)
 
 ```bash
-python day08/agent.py
+python day09/agent/runner.py
 ```
 
-Other days: `python day0N/ai_assistant.py` where present, `python day07/assistant.py` for the in-process planner, `python day08/agent.py` for MCP tools, and `python day01/hello_ai.py` for the first one-shot demo.
+Other days: `python day0N/ai_assistant.py` where present, `python day07/assistant.py`, `python day08/agent.py` (single-step MCP), `python day09/agent/runner.py` (multi-step stateful agent), and `python day01/hello_ai.py`.
 
 ## Learning path (by commit)
 
@@ -73,8 +73,9 @@ Other days: `python day0N/ai_assistant.py` where present, `python day07/assistan
 | **Day 06** | RAG workflow: knowledge base, keyword vs embedding retrieval | `day06/retriever.py`, `day06/similarity.py`, `day06/test_embedding.py`, `day06/test_retriever.py` |
 | **Day 07** | AI planner + tool agent (plan → execute → natural answer) | `day07/planner.py`, `day07/assistant.py`, `day07/tools.py`, `day07/test_planner.py` |
 | **Day 08** | MCP server + client; dynamic tool discovery and agent | `day08/agent.py`, `day08/model_context_protocol/mcp_server.py`, `mcp_client.py` |
+| **Day 09** | Multi-step agent loop, state, re-planning over MCP | `day09/agent/runner.py`, `loop.py`, `state.py`, `planner.py`, `executor.py` |
 
-Type `quit` at the prompt to exit interactive assistants (`day07/assistant.py`; Day 08 runs one request per invocation).
+Type `quit` at the prompt to exit interactive assistants (`day07/assistant.py`). Days 08–09 run one user request per invocation (Day 09 may call multiple tools in a loop).
 
 ### Day 01 — Basic assistant
 
@@ -136,6 +137,13 @@ python day06/test_retriever.py
 - `agent.py` discovers tools over MCP, plans with `CHAT_MODEL`, executes via `call_tool`, then answers in natural language.
 - See [day08/README.md](day08/README.md) for setup, run commands, and Day 07 vs Day 08 comparison.
 
+### Day 09 — Stateful multi-step agent
+
+- `state.py` tracks actions and observations across steps (`max_steps` default 5).
+- `loop.py` runs plan → execute → observe until the planner returns `FINISH` or the step limit is hit.
+- Same MCP tools as Day 08; code lives under `day09/agent/`.
+- See [day09/README.md](day09/README.md) for module breakdown and example multi-tool prompts.
+
 ## Project layout
 
 ```
@@ -148,7 +156,8 @@ ai-agent-development/
 ├── day06/          # Embeddings, similarity, RAG     → day06/README.md
 ├── day07/          # LLM planner + tool agent        → day07/README.md
 ├── day08/          # MCP server + agent              → day08/README.md
-├── pyproject.toml  # fastmcp and project deps (Day 08)
+├── day09/          # Multi-step loop + state         → day09/README.md
+├── pyproject.toml  # fastmcp and project deps (Day 08+)
 ├── .env            # Local config (not in git)
 └── .personal/      # Personal notes (ignored by git)
 ```

@@ -158,9 +158,14 @@ It provides a small Python API (`@mcp.tool()`, `Client`, `FastMCP.run()`) so you
 **Why does my tool call fail?**  
 Run from repo root, confirm `fastmcp` is installed, and ensure the planner output equals an MCP tool name (e.g. `current_time`, not `get_current_time`).
 
+## Next step
+
+**Day 09 — [Multi-step agent loop with state](../day09/README.md):** re-plan after each MCP observation, track actions in `state`, and finish when the planner returns `FINISH`.
+
 ## Related lessons
 
 - [Day 07 — In-process planner agent](../day07/README.md)
+- [Day 09 — Stateful agent loop](../day09/README.md)
 - [Day 04 — Original Python tools](../day04/README.md)
 - [Course overview](../README.md)
 
